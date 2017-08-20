@@ -1,23 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Image, ScrollView, Text, View } from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Iltalehti</Text>
+        <View style={{height: 310}}>
+          <ScrollView horizontal={true}>{this.renderILImage()}</ScrollView>
+        </View>
       </View>
     );
+  }
+
+  renderILImage () {
+    const date = '20170820';
+    const isSource = `http://static.iltalehti.fi/sarjakuvat/Fingerpori_${date}.gif`;
+    return <Image source={{uri: isSource}} style={{width: 1000, height: 310}}/>;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 });
