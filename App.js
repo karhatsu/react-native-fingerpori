@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { StyleSheet, Text, View } from 'react-native';
 import Comics from './Comics'
 
@@ -13,7 +14,7 @@ export default class App extends React.Component {
   }
 
   getILUrl () {
-    const date = '20170820';
+    const date = moment().format('YYYYMMDD');
     return `http://static.iltalehti.fi/sarjakuvat/Fingerpori_${date}.gif`;
   }
 }
