@@ -1,22 +1,20 @@
 import React from 'react';
-import { StyleSheet, Image, ScrollView, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import Comics from './Comics'
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Iltalehti</Text>
-        <View style={{height: 310}}>
-          <ScrollView horizontal={true}>{this.renderILImage()}</ScrollView>
-        </View>
+        <Comics imageUrl={this.getILUrl()} height={310} width={1000}/>
       </View>
     );
   }
 
-  renderILImage () {
+  getILUrl () {
     const date = '20170820';
-    const isSource = `http://static.iltalehti.fi/sarjakuvat/Fingerpori_${date}.gif`;
-    return <Image source={{uri: isSource}} style={{width: 1000, height: 310}}/>;
+    return `http://static.iltalehti.fi/sarjakuvat/Fingerpori_${date}.gif`;
   }
 }
 
