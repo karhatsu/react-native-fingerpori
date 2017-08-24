@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native';
 import Comics from './Comics'
+import ImageTitle from './ImageTitle'
 import NavigationButton from './NavigationButton'
 
 export default class App extends React.Component {
@@ -21,9 +22,9 @@ export default class App extends React.Component {
           <NavigationButton title="Seuraava" left={false} onPress={this.showNext}/>
         </View>
         <ScrollView>
-          <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Iltalehti</Text>
+          <ImageTitle title="Iltalehti"/>
           {this.renderIlImage()}
-          <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Helsingin Sanomat</Text>
+          <ImageTitle title="Helsingin Sanomat"/>
           {this.renderHsImage()}
         </ScrollView>
       </View>
