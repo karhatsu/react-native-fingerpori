@@ -9,6 +9,7 @@ export default class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      index: 0,
       ilDate: moment(),
       hsImageUrl: null
     }
@@ -19,7 +20,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <View style={styles.buttons}>
           <NavigationButton title="Edellinen" left={true} onPress={this.showPrevious}/>
-          <NavigationButton title="Seuraava" left={false} onPress={this.showNext}/>
+          <NavigationButton title="Seuraava" left={false} onPress={this.showNext} disabled={this.isToday()}/>
         </View>
         <ScrollView>
           <ImageTitle title="Iltalehti"/>
@@ -62,12 +63,16 @@ export default class App extends React.Component {
     });
   }
 
+  isToday() {
+    return this.state.index === 0;
+  }
+
   showPrevious = () => {
-    this.setState({ ilDate: this.state.ilDate.subtract(1, 'day') })
+    this.setState({ ilDate: this.state.ilDate.subtract(1, 'day'), index: this.state.index - 1 })
   };
 
   showNext = () => {
-    this.setState({ ilDate: this.state.ilDate.add(1, 'day') })
+    this.setState({ ilDate: this.state.ilDate.add(1, 'day'), index: this.state.index + 1 })
   };
 }
 
