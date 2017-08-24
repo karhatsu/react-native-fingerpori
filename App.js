@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Comics from './Comics'
 
 export default class App extends React.Component {
@@ -14,10 +14,12 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Iltalehti</Text>
-        <Comics imageUrl={this.getILUrl()} height={310} width={1000}/>
-        <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Helsingin Sanomat</Text>
-        {this.renderHsImage()}
+        <ScrollView>
+          <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Iltalehti</Text>
+          <Comics imageUrl={this.getILUrl()} height={310} width={1000}/>
+          <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Helsingin Sanomat</Text>
+          {this.renderHsImage()}
+        </ScrollView>
       </View>
     );
   }
