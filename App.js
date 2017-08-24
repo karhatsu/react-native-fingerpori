@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Comics from './Comics'
+import NavigationButton from './NavigationButton'
 
 export default class App extends React.Component {
   constructor (props) {
@@ -14,6 +15,10 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.buttons}>
+          <NavigationButton title="Edellinen" left={true} onPress={this.showPrevious}/>
+          <NavigationButton title="Seuraava" left={false} onPress={this.showNext}/>
+        </View>
         <ScrollView>
           <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Iltalehti</Text>
           <Comics imageUrl={this.getILUrl()} height={310} width={1000}/>
@@ -50,6 +55,9 @@ export default class App extends React.Component {
       });
     });
   }
+
+  showPrevious = () => {}
+  showNext = () => {}
 }
 
 const styles = StyleSheet.create({
@@ -58,4 +66,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20
   },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10
+  }
 });
