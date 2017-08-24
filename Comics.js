@@ -4,13 +4,13 @@ import { Image, ScrollView, View } from 'react-native';
 
 export default class Comics extends React.Component {
   static propTypes = {
-    imageUrl: PropTypes.string.isRequired,
-    height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired
+    imageUrl: PropTypes.string.isRequired
   };
 
   render () {
-    const {imageUrl, height, width} = this.props;
+    const width = 1000;
+    const height = 310;
+    const {imageUrl} = this.props;
     return (
       <View style={{height}}>
         <ScrollView horizontal={true}>

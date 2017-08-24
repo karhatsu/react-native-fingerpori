@@ -22,12 +22,16 @@ export default class App extends React.Component {
         </View>
         <ScrollView>
           <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Iltalehti</Text>
-          <Comics imageUrl={this.getILUrl()} height={310} width={1000}/>
+          {this.renderIlImage()}
           <Text style={{marginTop: 20, marginLeft: 5, fontSize: 30}}>Helsingin Sanomat</Text>
           {this.renderHsImage()}
         </ScrollView>
       </View>
     );
+  }
+
+  renderIlImage () {
+    return <Comics imageUrl={this.getILUrl()}/>;
   }
 
   getILUrl () {
@@ -37,7 +41,7 @@ export default class App extends React.Component {
 
   renderHsImage () {
     if (this.state.hsImageUrl) {
-      return <Comics imageUrl={this.state.hsImageUrl} height={310} width={1000}/>;
+      return <Comics imageUrl={this.state.hsImageUrl}/>;
     } else {
       return <ActivityIndicator size={60}/>;
     }
