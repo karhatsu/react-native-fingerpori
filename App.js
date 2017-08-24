@@ -8,6 +8,7 @@ export default class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      ilDate: moment(),
       hsImageUrl: null
     }
   }
@@ -30,7 +31,7 @@ export default class App extends React.Component {
   }
 
   getILUrl () {
-    const date = moment().format('YYYYMMDD');
+    const date = this.state.ilDate.format('YYYYMMDD');
     return `http://static.iltalehti.fi/sarjakuvat/Fingerpori_${date}.gif`;
   }
 
@@ -56,8 +57,13 @@ export default class App extends React.Component {
     });
   }
 
-  showPrevious = () => {}
-  showNext = () => {}
+  showPrevious = () => {
+    this.setState({ ilDate: this.state.ilDate.subtract(1, 'day') })
+  };
+
+  showNext = () => {
+    this.setState({ ilDate: this.state.ilDate.add(1, 'day') })
+  };
 }
 
 const styles = StyleSheet.create({
