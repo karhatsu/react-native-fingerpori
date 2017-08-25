@@ -5,13 +5,23 @@ import Comics from './Comics'
 import ImageTitle from './ImageTitle'
 import NavigationButton from './NavigationButton'
 
+const initialHsPageUrl = 'http://www.hs.fi/fingerpori';
+const initialHsPagePathRegex = /href=\"(\/fingerpori\/car-[0-9]+\.html)\"/;
+const hsImageUrlRegex = /(\/\/hs.mediadelivery.io\/img\/1920\/[a-f0-9]+.(png|jpg))/;
+const previousHsPagePathRegex = /<a class="article-navlink prev " href="(\/fingerpori\/car-[0-9]+.html)">/;
+
 export default class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       index: 0,
       ilDate: moment(),
-      hsImageUrl: null
+      hs: {
+        pageUrl: null,
+        imageUrl: null,
+        previous: null,
+        next: null
+      }
     }
   }
 
@@ -42,25 +52,41 @@ export default class App extends React.Component {
   }
 
   renderHsImage () {
-    if (this.state.hsImageUrl) {
-      return <Comics imageUrl={this.state.hsImageUrl}/>;
+    if (this.state.hs.imageUrl) {
+      return <Comics imageUrl={this.state.hs.imageUrl}/>;
     } else {
       return <ActivityIndicator size={60}/>;
     }
   }
 
   componentDidMount () {
-    fetch('http://www.hs.fi/fingerpori').then((response) => {
+    fetch(initialHsPageUrl).then((response) => {
       response.text().then((text) => {
-        let match = /href=\"(\/fingerpori\/car-[0-9]+\.html)\"/.exec(text);
-        fetch(`http://www.hs.fi${match[1]}`).then((response) => {
-          response.text().then((text) => {
-            match = /(\/\/hs.mediadelivery.io\/img\/1920\/[a-f0-9]+.(png|jpg))/.exec(text);
-            this.setState({hsImageUrl: `http://${match[1]}`});
-          });
-        });
+        const match = initialHsPagePathRegex.exec(text);
+        this.setState({hs: {...this.state.hs, pageUrl: `http://www.hs.fi${match[1]}`}});
       });
     });
+  }
+
+  componentDidUpdate() {
+    if (!this.state.hs.imageUrl && this.state.hs.pageUrl) {
+      fetch(this.state.hs.pageUrl).then((response) => {
+        response.text().then((text) => {
+          const imageMatch = hsImageUrlRegex.exec(text);
+          const prevMatch = previousHsPagePathRegex.exec(text);
+          this.setState({
+            hs: {
+              ...this.state.hs,
+              imageUrl: `http://${imageMatch[1]}`,
+              previous: {
+                pageUrl: `http://www.hs.fi${prevMatch[1]}`,
+                next: this.state.hs
+              }
+            }
+          })
+        });
+      });
+    }
   }
 
   isToday() {
@@ -68,11 +94,13 @@ export default class App extends React.Component {
   }
 
   showPrevious = () => {
-    this.setState({ ilDate: this.state.ilDate.subtract(1, 'day'), index: this.state.index - 1 })
+    const hs = this.state.hs.previous;
+    this.setState({ ilDate: this.state.ilDate.subtract(1, 'day'), index: this.state.index - 1, hs });
   };
 
   showNext = () => {
-    this.setState({ ilDate: this.state.ilDate.add(1, 'day'), index: this.state.index + 1 })
+    const hs = this.state.hs.next;
+    this.setState({ ilDate: this.state.ilDate.add(1, 'day'), index: this.state.index + 1, hs });
   };
 }
 
