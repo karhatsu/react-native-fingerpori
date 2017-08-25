@@ -63,7 +63,9 @@ export default class App extends React.Component {
     fetch(initialHsPageUrl).then((response) => {
       response.text().then((text) => {
         const match = initialHsPagePathRegex.exec(text);
-        this.setState({hs: {...this.state.hs, pageUrl: `http://www.hs.fi${match[1]}`}});
+        const hs = this.state.hs;
+        hs.pageUrl = `http://www.hs.fi${match[1]}`;
+        this.setState({hs});
       });
     });
   }
@@ -74,16 +76,13 @@ export default class App extends React.Component {
         response.text().then((text) => {
           const imageMatch = hsImageUrlRegex.exec(text);
           const prevMatch = previousHsPagePathRegex.exec(text);
-          this.setState({
-            hs: {
-              ...this.state.hs,
-              imageUrl: `http://${imageMatch[1]}`,
-              previous: {
-                pageUrl: `http://www.hs.fi${prevMatch[1]}`,
-                next: this.state.hs
-              }
-            }
-          })
+          const hs = this.state.hs;
+          hs.imageUrl = `http://${imageMatch[1]}`;
+          hs.previous = {
+            pageUrl: `http://www.hs.fi${prevMatch[1]}`,
+            next: this.state.hs
+          };
+          this.setState({hs});
         });
       });
     }
