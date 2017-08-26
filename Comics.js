@@ -8,8 +8,8 @@ export default class Comics extends React.Component {
   };
 
   render () {
-    const width = 1000;
-    const height = 310;
+    const width = 800;
+    const height = 248;
     const {imageUrl} = this.props;
     return (
       <View style={{height}}>
