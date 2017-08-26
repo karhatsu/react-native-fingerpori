@@ -77,7 +77,7 @@ export default class App extends React.Component {
           const imageMatch = hsImageUrlRegex.exec(text);
           const prevMatch = previousHsPagePathRegex.exec(text);
           const hs = this.state.hs;
-          hs.imageUrl = `http://${imageMatch[1]}`;
+          hs.imageUrl = `https:${imageMatch[1]}`;
           hs.previous = {
             pageUrl: `http://www.hs.fi${prevMatch[1]}`,
             next: this.state.hs
