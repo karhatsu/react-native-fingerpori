@@ -55,7 +55,7 @@ export default class App extends React.Component {
     if (this.state.hs.imageUrl) {
       return <Comics imageUrl={this.state.hs.imageUrl}/>;
     } else {
-      return <ActivityIndicator size={60} color="#a10e1f"/>;
+      return <ActivityIndicator size="large" color="#a10e1f"/>;
     }
   }
 
