@@ -7,7 +7,7 @@ import NavigationButton from './NavigationButton'
 
 const initialHsPageUrl = 'http://www.hs.fi/fingerpori';
 const initialHsPagePathRegex = /href=\"(\/fingerpori\/car-[0-9]+\.html)\"/;
-const hsImageUrlRegex = /(\/\/hs.mediadelivery.io\/img\/1920\/[a-f0-9]+.(png|jpg))/;
+const hsImageUrlRegex = /(\/\/hs.mediadelivery.fi\/img\/1920\/[a-f0-9]+.(png|jpg))/;
 const previousHsPagePathRegex = /<a class="article-navlink prev " href="(\/fingerpori\/car-[0-9]+.html)">/;
 
 export default class App extends React.Component {
