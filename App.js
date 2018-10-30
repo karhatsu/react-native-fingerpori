@@ -1,7 +1,5 @@
 import React from 'react';
-import moment from 'moment';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import Comics from './Comics'
 import ImageTitle from './ImageTitle'
 import NavigationButton from './NavigationButton'
 import ImageScraper from './ImageScraper'
@@ -10,12 +8,12 @@ export default class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      index: 0,
-      ilDate: moment()
+      index: 0
     }
   }
 
   render() {
+    const ilImageUrlRegex = /<img alt="Fingerpori [0-9.]{10}" src="https:(\/\/assets.ilcdn.fi\/[a-f0-9]+\.gif)"/
     return (
       <View style={styles.container}>
         <View style={styles.buttons}>
@@ -24,7 +22,13 @@ export default class App extends React.Component {
         </View>
         <ScrollView>
           <ImageTitle title="Iltalehti"/>
-          {this.renderIlImage()}
+          <ImageScraper
+            domain="https://www.iltalehti.fi"
+            index={-this.state.index}
+            imageUrlRegex={ilImageUrlRegex}
+            initialUrl="https://www.iltalehti.fi/fingerpori"
+            previousPagePathRegex={/<a href="(\/fingerpori\/[0-9.]{10})" class="prev">&lt;<\/a>/}
+          />
           <ImageTitle title="Helsingin Sanomat"/>
           <ImageScraper
             domain="https://www.hs.fi"
@@ -39,25 +43,16 @@ export default class App extends React.Component {
     );
   }
 
-  renderIlImage () {
-    return <Comics imageUrl={this.getILUrl()}/>;
-  }
-
-  getILUrl () {
-    const date = this.state.ilDate.format('YYYYMMDD');
-    return `http://static.iltalehti.fi/sarjakuvat/Fingerpori_${date}.gif`;
-  }
-
   isToday() {
     return this.state.index === 0;
   }
 
   showPrevious = () => {
-    this.setState({ ilDate: this.state.ilDate.subtract(1, 'day'), index: this.state.index - 1 });
+    this.setState({ index: this.state.index - 1 });
   };
 
   showNext = () => {
-    this.setState({ ilDate: this.state.ilDate.add(1, 'day'), index: this.state.index + 1 });
+    this.setState({ index: this.state.index + 1 });
   };
 }
 

@@ -8,7 +8,7 @@ export default class ImageScraper extends React.PureComponent {
     domain: PropTypes.string.isRequired,
     imageUrlRegex: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    initialPagePathRegex: PropTypes.object.isRequired,
+    initialPagePathRegex: PropTypes.object,
     initialUrl: PropTypes.string.isRequired,
     previousPagePathRegex: PropTypes.object.isRequired
   }
@@ -33,12 +33,16 @@ export default class ImageScraper extends React.PureComponent {
 
   componentDidMount () {
     const { domain, initialUrl, initialPagePathRegex } = this.props
-    fetch(initialUrl).then((response) => {
-      response.text().then(text => {
-        const match = initialPagePathRegex.exec(text);
-        this.setState({ pageUrls: [`${domain}${match[1]}`] });
+    if (initialPagePathRegex) {
+      fetch(initialUrl).then((response) => {
+        response.text().then(text => {
+          const match = initialPagePathRegex.exec(text);
+          this.setState({pageUrls: [`${domain}${match[1]}`]});
+        });
       });
-    });
+    } else {
+      this.setState({pageUrls: [initialUrl]})
+    }
   }
 
   componentDidUpdate() {
