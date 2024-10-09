@@ -31,8 +31,8 @@ export default class App extends React.Component {
           <ImageScraper
             domain="https://www.hs.fi"
             index={-this.state.index}
-            imageUrlRegex={/(\/\/hs.mediadelivery.fi\/img\/1920\/[a-f0-9]+.(png|jpg))/}
-            initialUrl="http://www.hs.fi/fingerpori"
+            imageUrlRegex={/(\/\/images\.sanoma-sndp\.fi\/[a-f0-9]+\.jpg\/normal\/1920\.jpg)/}
+            initialUrl="https://www.hs.fi/fingerpori"
             initialPagePathRegex={/href="(\/fingerpori\/car-[0-9]+\.html)"/}
             previousPagePathRegex={/<a class="article-navlink prev " href="(\/fingerpori\/car-[0-9]+.html)">/}
           />
