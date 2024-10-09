@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, StyleSheet, Text } from "react-native"
-import Comics from "./Comics";
+import Comics from "./Comics"
 
 const ImageListScraper = ({ pageUrl, imageUrlRegex, index }) => {
   const [imageUrls, setImageUrls] = useState([])
