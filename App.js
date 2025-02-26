@@ -33,7 +33,7 @@ const App = () => {
         <ImageScraper
           domain="https://www.hs.fi"
           index={-index}
-          imageUrlRegex={/(\/\/images\.sanoma-sndp\.fi\/[a-f0-9]+\/normal\/1920\.jpg)/}
+          imageUrlRegex={/(\/\/images\.sanoma-sndp\.fi\/[a-f0-9]+\/normal\/[0-9]+\.jpg)/}
           initialUrl="https://www.hs.fi/fingerpori"
           initialPagePathRegex={/href="(\/fingerpori\/car-[0-9]+\.html)"/}
           previousPagePathRegex={/<a class="article-navlink prev " href="(\/fingerpori\/car-[0-9]+.html)">/}
