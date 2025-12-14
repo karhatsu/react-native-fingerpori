@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import ImageTitle from './ImageTitle'
 import NavigationButton from './NavigationButton'
 import ImageScraper from './ImageScraper'
