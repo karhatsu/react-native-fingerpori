@@ -32,7 +32,7 @@ const ImageListScraper = ({ pageUrl, imageUrlRegex, index }) => {
 
 const s = StyleSheet.create({
   notFound: {
-    marginVertical: 8,
+    margin: 8,
   },
 })
 
