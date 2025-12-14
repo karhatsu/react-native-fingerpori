@@ -24,14 +24,14 @@ const App = () => {
         <NavigationButton title="Seuraava" onPress={showNext} disabled={index === 0} />
       </View>
       <ScrollView>
+        <ImageTitle title="Helsingin Sanomat"/>
+        <HsScraper index={-index} />
         <ImageTitle title="Iltalehti"/>
         <ImageListScraper
           pageUrl="https://www.iltalehti.fi/fingerpori"
           imageUrlRegex={/img alt="Fingerpori [0-9.]{10}" src="(.*?)" class="list-image"/g}
           index={-index}
         />
-        <ImageTitle title="Helsingin Sanomat"/>
-        <HsScraper index={-index} />
       </ScrollView>
     </SafeAreaView>
   )
