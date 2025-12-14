@@ -20,8 +20,8 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.buttons}>
-        <NavigationButton title="Edellinen" left={true} onPress={showPrevious} />
-        <NavigationButton title="Seuraava" left={false} onPress={showNext} disabled={index === 0} />
+        <NavigationButton title="Edellinen" onPress={showPrevious} />
+        <NavigationButton title="Seuraava" onPress={showNext} disabled={index === 0} />
       </View>
       <ScrollView>
         <ImageTitle title="Iltalehti"/>
