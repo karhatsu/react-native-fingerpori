@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ImageTitle from './ImageTitle'
-import NavigationButton from './NavigationButton'
-import ImageScraper from './ImageScraper'
-import ImageListScraper from "./ImageListScraper"
+import ImageTitle from './src/ImageTitle'
+import NavigationButton from './src/NavigationButton'
+import ImageScraper from './src/ImageScraper'
+import ImageListScraper from "./src/ImageListScraper"
 
 const App = () => {
   const [index, setIndex] = useState(0)
