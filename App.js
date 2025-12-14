@@ -3,8 +3,8 @@ import { ScrollView, StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ImageTitle from './src/ImageTitle'
 import NavigationButton from './src/NavigationButton'
-import ImageScraper from './src/ImageScraper'
 import ImageListScraper from "./src/ImageListScraper"
+import HsScraper from "./src/HsScraper"
 
 const App = () => {
   const [index, setIndex] = useState(0)
@@ -31,14 +31,7 @@ const App = () => {
           index={-index}
         />
         <ImageTitle title="Helsingin Sanomat"/>
-        <ImageScraper
-          domain="https://www.hs.fi"
-          index={-index}
-          imageUrlRegex={/(\/\/images\.sanoma-sndp\.fi\/[a-f0-9]+\/normal\/[0-9]+\.jpg)/}
-          initialUrl="https://www.hs.fi/fingerpori"
-          initialPagePathRegex={/href="(\/fingerpori\/car-[0-9]+\.html)"/}
-          previousPagePathRegex={/<a class="article-navlink prev " href="(\/fingerpori\/car-[0-9]+.html)">/}
-        />
+        <HsScraper index={-index} />
       </ScrollView>
     </SafeAreaView>
   )
